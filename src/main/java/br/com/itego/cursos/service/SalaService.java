@@ -21,12 +21,11 @@ public class SalaService {
 	public Sala findById(Integer id) {
 		Optional<Sala> oSala = repo.findById(id);
 		
-		if(oSala.isPresent()) {
-			return oSala.get();
+		if(!oSala.isPresent()) {
+			throw new IllegalArgumentException("Sala não encontrada: " + id);
 		}
-		else {
 			return new Sala();
-		}
+	
 	}
 	public void save(Sala sala) {
 		repo.save(sala);

@@ -24,7 +24,7 @@ public class CidadeService {
 		Optional<Cidade> ocidade = repo.findById(id);
 		
 		if(!ocidade.isPresent()) {
-			return new Cidade();
+			throw new IllegalArgumentException("Cidade não encontrada: " + id);
 		}
 		
 		return ocidade.get();

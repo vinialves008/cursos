@@ -23,7 +23,7 @@ public class EstadoService {
 		Optional<Estado> oestado = repo.findById(id);
 		
 		if(!oestado.isPresent()) {
-			return new Estado();
+			throw new IllegalArgumentException("Estado não encontrado: " + id);
 		}
 		
 		return oestado.get();

@@ -1,14 +1,16 @@
 package br.com.itego.cursos.domain.enums;
 
-public enum EnumTipoCurso {
+public enum EnumTipoFormacao {
 	
-	TECNICO(1, "Cursos Técnicos"),
-	QUALIFICACAO(2, "Cursos de Qualificação");
+	SUPERIOR(1, "Ensino Superior"),
+	POSGRADUACAO(2, "Pós Graduação"),
+	MESTRADO(3, "Mestrado"),
+	DOUTORADO(4, "Doutorado");
 	
 	private Integer cod;
 	private String descricao;
 	
-	private EnumTipoCurso(Integer cod, String descricao) {
+	private EnumTipoFormacao(Integer cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -21,11 +23,11 @@ public enum EnumTipoCurso {
 		return descricao;
 	}
 	
-	public static EnumTipoCurso toEnum(Integer cod) {
+	public static EnumTipoFormacao toEnum(Integer cod) {
 		if(cod == null) {
 			return null;
 		}
-		for(EnumTipoCurso x : EnumTipoCurso.values()) {
+		for(EnumTipoFormacao x : EnumTipoFormacao.values()) {
 			if(cod.equals(x.getCod())) {
 				return x;
 			}

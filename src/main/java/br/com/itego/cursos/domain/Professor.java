@@ -2,15 +2,19 @@ package br.com.itego.cursos.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -30,9 +34,9 @@ public class Professor extends Pessoa implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dtDemissao;
 	
-	@OneToOne( optional = false)
-    @JoinColumn(name = "pessoa_id", nullable = false)
-	private Pessoa pessoa;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "leciona", joinColumns = @JoinColumn(name = "professor_id"), inverseJoinColumns = @JoinColumn(name = "turma_id"))
+	private List<Turma> turmas; 
 
 	public Integer getId() {
 		return id;
@@ -66,12 +70,4 @@ public class Professor extends Pessoa implements Serializable {
 		this.dtDemissao = dtDemissao;
 	}
 
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-	
 }
